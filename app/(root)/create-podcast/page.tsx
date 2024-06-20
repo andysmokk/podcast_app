@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useState } from "react";
 
 // import { Button } from "@/components/ui/button";
 import {
@@ -21,9 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
@@ -32,7 +33,11 @@ const formSchema = z.object({
   }),
 });
 
+const voiceCategories = ["alloy", "shimmer", "nova", "echo", "fable", "onyx"];
+
 const CreatePodcast = () => {
+  const [voiceType, setVoiceType] = useState<string | null>(null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -70,7 +75,8 @@ const CreatePodcast = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="input-class focus-visible:ring-offset-orange-1placeholder="Podcast"
+                      className="input-class focus-visible:ring-offset-orange-1"
+                      placeholder="Podcast"
                       {...field}
                     />
                   </FormControl>
@@ -84,10 +90,10 @@ const CreatePodcast = () => {
                 Select AI voice
               </Label>
 
-              <Select>
+              <Select onValueChange={(value) => setVoiceType(value)}>
                 <SelectTrigger
                   className={cn(
-                    "text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1"
+                    "text-16 w-full border-none bg-black-1 text-gray-1 focus-visible:ring-offset-orange-1 mt-2"
                   )}
                 >
                   <SelectValue
@@ -96,10 +102,10 @@ const CreatePodcast = () => {
                   />
                 </SelectTrigger>
                 <SelectContent
-                  className="text-16 border-none bg-black-1
+                  className="text-16 border-none bg-black-1 text-white-1
                  focus:ring-orange-1"
                 >
-                  {["voice_1", "voice_2", "voice_3"].map((category) => (
+                  {voiceCategories.map((category) => (
                     <SelectItem
                       className="capitalize focus:bg-orange-1"
                       value={category}
@@ -109,8 +115,36 @@ const CreatePodcast = () => {
                     </SelectItem>
                   ))}
                 </SelectContent>
+
+                {voiceType && (
+                  <audio
+                    src={`/${voiceType}.mp3`}
+                    autoPlay
+                    className="hidden"
+                  />
+                )}
               </Select>
             </div>
+
+            <FormField
+              control={form.control}
+              name="podcastDescription"
+              render={({ field }) => (
+                <FormItem className="flex flex-col gap-2.5">
+                  <FormLabel className="text-16 font-bold text-white-1">
+                    Description
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                      className="input-class focus-visible:ring-offset-orange-1"
+                      placeholder="Write a short podcast description ..."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-white-1" />
+                </FormItem>
+              )}
+            />
           </div>
         </form>
       </Form>
