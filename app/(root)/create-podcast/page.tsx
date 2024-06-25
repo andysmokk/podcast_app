@@ -174,6 +174,7 @@ const CreatePodcast = () => {
               audio={audioUrl}
               setVoicePrompt={setVoicePrompt}
               setAudioDuration={setAudioDuration}
+              voicePrompt={voicePrompt}
             />
 
             <GenerateThumbnail />
