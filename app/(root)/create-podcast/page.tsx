@@ -43,8 +43,9 @@ const CreatePodcast = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [imagePrompt, setImagePrompt] = useState("");
-  const [imageStorageId, setImageStorageIdStorageId] =
-    useState<Id<"_storage"> | null>(null);
+  const [imageStorageId, setImageStorageId] = useState<Id<"_storage"> | null>(
+    null
+  );
   const [imageUrl, setImageUrl] = useState("");
 
   const [audioUrl, setAudioUrl] = useState("");
@@ -177,7 +178,13 @@ const CreatePodcast = () => {
               voicePrompt={voicePrompt}
             />
 
-            <GenerateThumbnail />
+            <GenerateThumbnail
+              setImage={setImageUrl}
+              setImageStorageId={setImageStorageId}
+              image={imageUrl}
+              imagePrompt={imagePrompt}
+              setImagePrompt={setImagePrompt}
+            />
 
             <div className="mt-10 w-full">
               <Button
