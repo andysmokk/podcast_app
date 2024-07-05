@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Loader } from "lucide-react";
 import Image from "next/image";
-import { useMutation } from "convex/react";
+import { useAction, useMutation } from "convex/react";
 import { useUploadFiles } from "@xixixao/uploadstuff/react";
 import { api } from "@/convex/_generated/api";
 
@@ -27,6 +27,7 @@ const GenerateThumbnail = ({
   const generateUploadUrl = useMutation(api.files.generateUploadUrl);
   const { startUpload } = useUploadFiles(generateUploadUrl);
   const getImageUrl = useMutation(api.podcasts.getUrl);
+  const handleGenerateThumbnail = useAction(api.openai.generateThumbnailAction);
 
   const handleImage = async (blob: Blob, fileName: string) => {
     setImageLoading(true);
