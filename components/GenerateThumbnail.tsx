@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useAction, useMutation } from "convex/react";
 import { useUploadFiles } from "@xixixao/uploadstuff/react";
 import { api } from "@/convex/_generated/api";
+import { v4 as uuidv4 } from "uuid";
 
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -50,7 +51,18 @@ const GenerateThumbnail = ({
       toast({ title: "Error generating thumbnail", variant: "destructive" });
     }
   };
-  const generateImage = async () => {};
+
+  const generateImage = async () => {
+    try {
+      const response = await handleGenerateThumbnail({ prompt: imagePrompt });
+      const blob = new Blob([response], { type: "image/png" });
+      handleImage(blob, `thumbnail-${uuidv4()}.png`);
+    } catch (error) {
+      console.error(error);
+      toast({ title: "Error generating thumbnail", variant: "destructive" });
+    }
+  };
+
   const uploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
