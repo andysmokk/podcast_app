@@ -47,7 +47,7 @@ const GenerateThumbnail = ({
       setImageLoading(false);
       toast({ title: "Thumbnail generated successfully" });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({ title: "Error generating thumbnail", variant: "destructive" });
     }
   };
@@ -74,7 +74,7 @@ const GenerateThumbnail = ({
 
       handleImage(blob, file.name);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({ title: "Error uploading image", variant: "destructive" });
     }
   };
