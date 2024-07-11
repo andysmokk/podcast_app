@@ -18,3 +18,10 @@ export interface GenerateThumbnailProps {
   imagePrompt: string;
   setImagePrompt: Dispatch<SetStateAction<string>>;
 }
+
+export interface PodcastCardProps {
+  imgUrl: string;
+  title: string;
+  description: string;
+  podcastId: Id<"podcasts">;
+}
