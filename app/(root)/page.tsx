@@ -20,7 +20,7 @@ function Home() {
                 key={_id}
                 title={podcastTitle}
                 description={podcastDescription}
-                imgUrl={imageUrl}
+                imgUrl={imageUrl!}
                 podcastId={_id}
               />
             )
