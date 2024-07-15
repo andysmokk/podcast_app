@@ -51,6 +51,10 @@ const PodcastDetails = ({
           </p>
         </div>
       </div>
+
+      <section className="mt-8 flex flex-col gap-5">
+        <h1 className="text-20 font-bold text-white-1">Similar podcasts</h1>
+      </section>
     </section>
   );
 };
