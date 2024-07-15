@@ -6,6 +6,7 @@ import { useQuery } from "convex/react";
 import Image from "next/image";
 
 import PodcastDetailPlayer from "@/components/PodcastDetailPlayer";
+import LoaderSpinner from "@/components/LoaderSpinner";
 
 const PodcastDetails = ({
   params: { podcastId },
@@ -15,6 +16,14 @@ const PodcastDetails = ({
   const podcast = useQuery(api.podcasts.getPodcastById, {
     podcastId,
   });
+
+  const similarPodcasts = useQuery(api.podcasts.getPodcastByVoiceType, {
+    podcastId,
+  });
+
+  if (!similarPodcasts || !podcast) {
+    return <LoaderSpinner />;
+  }
 
   return (
     <section className="flex w-full flex-col">
