@@ -25,3 +25,10 @@ export interface PodcastCardProps {
   description: string;
   podcastId: Id<"podcasts">;
 }
+
+export interface EmptyStateProps {
+  title: string;
+  buttonLink: string;
+  buttonText: string;
+  search?: boolean;
+}

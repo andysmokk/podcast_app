@@ -7,6 +7,8 @@ import Image from "next/image";
 
 import PodcastDetailPlayer from "@/components/PodcastDetailPlayer";
 import LoaderSpinner from "@/components/LoaderSpinner";
+import PodcastCard from "@/components/PodcastCard";
+import EmptyState from "@/components/EmptyState";
 
 const PodcastDetails = ({
   params: { podcastId },
@@ -63,6 +65,28 @@ const PodcastDetails = ({
 
       <section className="mt-8 flex flex-col gap-5">
         <h1 className="text-20 font-bold text-white-1">Similar podcasts</h1>
+
+        {similarPodcasts && similarPodcasts.length > 0 ? (
+          <div className="podcast_grid">
+            {similarPodcasts?.map(
+              ({ _id, podcastTitle, podcastDescription, imageUrl }) => (
+                <PodcastCard
+                  key={_id}
+                  title={podcastTitle}
+                  description={podcastDescription}
+                  imgUrl={imageUrl!}
+                  podcastId={_id}
+                />
+              )
+            )}
+          </div>
+        ) : (
+          <EmptyState
+            title="No similar podcasts found"
+            buttonLink="/discover"
+            buttonText="Discover more podcasts"
+          />
+        )}
       </section>
     </section>
   );
