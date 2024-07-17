@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "polished-hippopotamus-92.convex.cloud",
       },
+      {
+        protocol: 'https',
+        hostname: 'img.clerk.com'
+      },
     ],
   },
 };
