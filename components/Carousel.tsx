@@ -34,16 +34,20 @@ const EmblaCarousel = ({ fansLikeDetail }: CarouselProps) => {
     fansLikeDetail?.filter((item: any) => item.totalPodcasts > 0);
 
   return (
-    <section className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {slides &&
-            slides.map((index) => (
-              <div className="embla__slide" key={index}>
-                <div className="embla__slide__number">{index + 1}</div>
-              </div>
-            ))}
-        </div>
+    <section
+      className="flex w-full flex-col gap-4 overflow-hidden"
+      ref={emblaRef}
+    >
+      <div className="flex">
+        {slides && slides.slice(0, 5).map((item) => (
+          <figure
+            key={item._id}
+            className="carousel_box"
+            onClick={() =>
+              router.push(`/podcasts/${item.podcast[0]?.podcastId}`)
+            }
+          ></figure>
+        ))}
       </div>
 
       <div className="embla__controls">
