@@ -28,8 +28,8 @@ export interface PodcastCardProps {
 
 export interface EmptyStateProps {
   title: string;
-  buttonLink: string;
-  buttonText: string;
+  buttonLink?: string;
+  buttonText?: string;
   search?: boolean;
 }
 
