@@ -6,19 +6,22 @@ import Image from "next/image";
 import { Input } from "./ui/input";
 import { Router } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import { useDebounce } from "@/lib/useDebounce";
 
 const Searchbar = () => {
-    const [search, setSearch] = useState("");
-    const router = useRouter();
-    const pathname = usePathname();
+  const [search, setSearch] = useState("");
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const debouncedValue = useDebounce(search, 500);
 
   useEffect(() => {
-    if (search) {
-      router.push(`/discover?search=${search}`);
-    } else if (!search && pathname === "/discover") {
+    if (debouncedValue) {
+      router.push(`/discover?search=${debouncedValue}`);
+    } else if (!debouncedValue && pathname === "/discover") {
       router.push("/discover");
     }
-  }, [search, router, pathname]);
+  }, [debouncedValue, router, pathname]);
 
   return (
     <div className="relative mt-8 block">
