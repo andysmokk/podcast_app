@@ -11,7 +11,7 @@ import Searchbar from "@/components/Searchbar";
 const Discover = ({
   searchParams: { search },
 }: {
-  searchParams: { search: string }
+  searchParams: { search: string };
 }) => {
   const podcastData = useQuery(api.podcasts.getPodcastBySearch, {
     search: search || "",
@@ -19,10 +19,12 @@ const Discover = ({
 
   return (
     <div className="flex flex-col gap-9">
+      <Searchbar />
       <div className="flex flex-col gap-9">
-        <Searchbar />
-
-        <h1 className="text-20 font-bold text-white-1">Discover</h1>
+        <h1 className="text-20 font-bold text-white-1">
+          {!search ? "Discover Trending Podcasts" : "Search results for "}
+          {search && <span className="text-orange-1">{search}</span>}
+        </h1>
 
         {podcastData ? (
           <>
