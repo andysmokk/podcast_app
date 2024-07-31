@@ -5,19 +5,41 @@ import { useQuery } from "convex/react";
 
 import EmptyState from "@/components/EmptyState";
 import LoaderSpinner from "@/components/LoaderSpinner";
+import PodcastCard from "@/components/PodcastCard";
+import Searchbar from "@/components/Searchbar";
 
-const Discover = () => {
-  const podcastData = useQuery(api.podcasts.getPodcastBySearch, { search: "" });
+const Discover = ({
+  searchParams: { search },
+}: {
+  searchParams: { search: string }
+}) => {
+  const podcastData = useQuery(api.podcasts.getPodcastBySearch, {
+    search: search || "",
+  });
 
   return (
     <div className="flex flex-col gap-9">
       <div className="flex flex-col gap-9">
+        <Searchbar />
+
         <h1 className="text-20 font-bold text-white-1">Discover</h1>
 
         {podcastData ? (
           <>
             {podcastData.length > 0 ? (
-              <div></div>
+              <div className="podcast_grid">
+                {podcastData?.map(
+                  ({ _id, podcastTitle, podcastDescription, imageUrl }) => (
+                    <PodcastCard
+                      key={_id}
+                      title={podcastTitle}
+                      description={podcastDescription}
+                      imgUrl={imageUrl!}
+                      podcastId={_id}
+                    />
+                  )
+                )}
+              </div>
             ) : (
               <EmptyState title="No results found" />
             )}
