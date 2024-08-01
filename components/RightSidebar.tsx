@@ -9,15 +9,12 @@ import Header from "./Header";
 import Carousel from "./Carousel";
 import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
-import LoaderSpinner from "./LoaderSpinner";
 
 const RightSidebar = () => {
   const { user } = useUser();
   const router = useRouter();
 
   const topPodcasters = useQuery(api.users.getTopUserByPodcastCount);
-
-  if (!topPodcasters) return <LoaderSpinner />;
 
   return (
     <section className="right_sidebar text-white-1">
