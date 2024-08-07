@@ -41,8 +41,11 @@ const LeftSidebar = () => {
               href={route}
               key={label}
               className={cn(
-                "flex gap-3 items-center py-4 max-lg:px-4 justify-center lg:justify-start",
-                { "bg-nav-focus border-r-4 border-orange-1": isActive }
+                "flex gap-3 items-center font-semibold py-4 max-lg:px-4 justify-center lg:justify-start hover:text-orange-1 focus:text-orange-1",
+                {
+                  "bg-nav-focus border-r-4 border-orange-1 text-orange-1":
+                    isActive,
+                }
               )}
             >
               <Image src={imgURL} alt={label} width={24} height={24} />
@@ -54,7 +57,11 @@ const LeftSidebar = () => {
 
       <SignedOut>
         <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
-          <Button asChild className="text-16 w-full bg-orange-1 font-extrabold">
+          <Button
+            asChild
+            className="text-16 w-full bg-orange-1 font-extrabold 
+            transition-all duration-500 hover:bg-black-5 focus:bg-black-5"
+          >
             <Link href="/sign-in">Sign in</Link>
           </Button>
         </div>
@@ -63,7 +70,8 @@ const LeftSidebar = () => {
       <SignedIn>
         <div className="flex-center w-full pb-14 max-lg:px-4 lg:pr-8">
           <Button
-            className="text-16 w-full bg-orange-1 font-extrabold"
+            className="text-16 w-full bg-orange-1 font-extrabold 
+            transition-all duration-500 hover:bg-black-5 focus:bg-black-5"
             onClick={() => signOut(() => router.push("/"))}
           >
             Log Out

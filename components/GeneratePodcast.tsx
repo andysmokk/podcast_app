@@ -95,7 +95,7 @@ const GeneratePodcast = (props: GeneratePodcastProps) => {
           onClick={generatePodcast}
           type="submit"
           className="text-16 bg-orange-1 py-4 font-bold text-white-1 
-          transition-all duration-500 hover:bg-black-1 focus:bg-black-1"
+          transition-all duration-500 hover:bg-black-5 focus:bg-black-5"
         >
           {isGenerating ? (
             <>
