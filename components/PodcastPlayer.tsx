@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { IconContext } from "react-icons";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 import { formatTime } from "@/lib/formatTime";
 import { cn } from "@/lib/utils";
@@ -15,7 +17,7 @@ const PodcastPlayer = () => {
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const { audio } = useAudio();
+  const { audio, setAudio } = useAudio();
 
   const togglePlayPause = () => {
     if (audioRef.current?.paused) {
@@ -32,6 +34,14 @@ const PodcastPlayer = () => {
       audioRef.current.muted = !isMuted;
       setIsMuted((prev) => !prev);
     }
+  };
+
+  const onClose = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    setAudio(undefined);
   };
 
   const forward = () => {
@@ -173,6 +183,15 @@ const PodcastPlayer = () => {
               onClick={toggleMute}
               className="cursor-pointer"
             />
+          </div>
+          <div className="flex w-full gap-2 cursor-pointer">
+            <IconContext.Provider
+              value={{ color: "grey", className: "react-icons" }}
+            >
+              <button type="button">
+                <RiCloseCircleFill onClick={onClose} />
+              </button>
+            </IconContext.Provider>
           </div>
         </div>
       </section>
