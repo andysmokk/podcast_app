@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Toaster } from "@/components/ui/toaster";
+import Link from "next/link";
 
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
@@ -22,12 +23,18 @@ export default function RootLayout({
         >
           <div className="mx-auto flex w-full max-w-5xl flex-col max-sm:px-4">
             <div className="flex h-16 items-center justify-between md:hidden">
-              <Image
-                src="/icons/logo.svg"
-                alt="menu icon"
-                width={30}
-                height={30}
-              />
+              <Link
+                href="/"
+                className="flex cursor-pointer items-center gap-1 max-lg:justify-center"
+              >
+                <Image
+                  src="/icons/logo.svg"
+                  alt="menu icon"
+                  width={30}
+                  height={30}
+                />
+              </Link>
+
               <MobileNav />
             </div>
             <div className="flex flex-col md:pb-14">
