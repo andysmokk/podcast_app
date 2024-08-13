@@ -59,7 +59,8 @@ const MobileNav = () => {
                         className={cn(
                           "flex gap-3 items-center py-4 max-lg:px-4 justify-start",
                           {
-                            "bg-nav-focus border-r-4 border-orange-1": isActive,
+                            "bg-nav-focus text-orange-1 font-semibold border-r-4 border-orange-1":
+                              isActive,
                           }
                         )}
                       >
