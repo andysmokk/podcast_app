@@ -13,7 +13,7 @@ function Home() {
       <section className="flex flex-col gap-5">
         <h1 className="text-20 font-bold text-white-1">Trending podcasts</h1>
 
-        <div className="podcast_grid">
+        <div className="podcast_grid pb-5">
           {trendingPodcasts?.map(
             ({ _id, podcastTitle, podcastDescription, imageUrl }) => (
               <PodcastCard

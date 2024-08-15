@@ -39,7 +39,7 @@ const ProfilePage = ({
       <section className="mt-9 flex flex-col gap-5">
         <h1 className="text-20 font-bold text-white-1">All Podcasts</h1>
         {podcastsData && podcastsData.podcasts.length > 0 ? (
-          <div className="podcast_grid">
+          <div className="podcast_grid pb-5">
             {podcastsData?.podcasts
               ?.slice(0, 4)
               .map((podcast) => (

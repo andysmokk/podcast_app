@@ -76,7 +76,7 @@ const PodcastDetails = ({
         <h1 className="text-20 font-bold text-white-1">Similar podcasts</h1>
 
         {similarPodcasts && similarPodcasts.length > 0 ? (
-          <div className="podcast_grid">
+          <div className="podcast_grid pb-5">
             {similarPodcasts?.map(
               ({ _id, podcastTitle, podcastDescription, imageUrl }) => (
                 <PodcastCard

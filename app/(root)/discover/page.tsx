@@ -29,7 +29,7 @@ const Discover = ({
         {podcastData ? (
           <>
             {podcastData.length > 0 ? (
-              <div className="podcast_grid">
+              <div className="podcast_grid pb-5">
                 {podcastData?.map(
                   ({ _id, podcastTitle, podcastDescription, imageUrl }) => (
                     <PodcastCard
