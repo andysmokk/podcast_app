@@ -166,3 +166,8 @@ export const getPodcastByAuthorId = query({
     return { podcasts, listeners: totalListeners };
   },
 });
+
+export const updatePodcastViews = mutation({
+  args: {},
+  handler: async (ctx, args) => {},
+});
