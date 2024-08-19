@@ -19,7 +19,7 @@ const EmptyState = ({
         height={250}
       />
 
-      <div className="flex-center w-full max-w-[254px] flex-col gap-3">
+      <div className="flex-center w-full pb-4 max-w-[254px] flex-col gap-3">
         <h1 className="text-16 text-center font-medium text-white-1">
           {title}
         </h1>
