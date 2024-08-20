@@ -4,7 +4,6 @@ import { useMutation } from "convex/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
 import { api } from "@/convex/_generated/api";
 import { useAudio } from "@/providers/AudioProvider";
 import { PodcastDetailPlayerProps } from "@/types";
@@ -30,6 +29,7 @@ const PodcastDetailPlayer = ({
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = useState(false);
   const deletePodcast = useMutation(api.podcasts.deletePodcast);
+  const updatePlayCount = useMutation(api.podcasts.updatePodcastViews);
 
   const handleDelete = async () => {
     try {
@@ -55,6 +55,7 @@ const PodcastDetailPlayer = ({
       author,
       podcastId,
     });
+    updatePlayCount({ podcastId });
   };
 
   if (!imageUrl || !authorImageUrl) return <LoaderSpinner />;

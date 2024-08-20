@@ -1,5 +1,7 @@
 "use client";
 import Image from "next/image";
+import { api } from "@/convex/_generated/api";
+import { useMutation } from "convex/react";
 import { useEffect, useState } from "react";
 
 import { useAudio } from "@/providers/AudioProvider";
@@ -14,8 +16,8 @@ const ProfileCard = ({
   userFirstName,
 }: ProfileCardProps) => {
   const { setAudio } = useAudio();
-
   const [randomPodcast, setRandomPodcast] = useState<PodcastProps | null>(null);
+  const updatePlayCount = useMutation(api.podcasts.updatePodcastViews);
 
   const playRandomPodcast = () => {
     const randomIndex = Math.floor(Math.random() * podcastData.podcasts.length);
@@ -24,7 +26,16 @@ const ProfileCard = ({
   };
 
   useEffect(() => {
-    if (randomPodcast) {
+    if (randomPodcast && randomPodcast._id) {
+      const updatePlay = async () => {
+        try {
+          await updatePlayCount({ podcastId: randomPodcast._id });
+        } catch (error) {
+          console.error("Failed to update play count:", error);
+        }
+      };
+      updatePlay();
+
       setAudio({
         title: randomPodcast.podcastTitle,
         audioUrl: randomPodcast.audioUrl || "",
@@ -33,7 +44,7 @@ const ProfileCard = ({
         podcastId: randomPodcast._id,
       });
     }
-  }, [randomPodcast, setAudio]);
+  }, [randomPodcast, setAudio, updatePlayCount]);
 
   if (!imageUrl) return <LoaderSpinner />;
 

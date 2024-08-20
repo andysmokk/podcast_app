@@ -168,6 +168,18 @@ export const getPodcastByAuthorId = query({
 });
 
 export const updatePodcastViews = mutation({
-  args: {},
-  handler: async (ctx, args) => {},
+  args: {
+    podcastId: v.id("podcasts"),
+  },
+  handler: async (ctx, args) => {
+    const podcast = await ctx.db.get(args.podcastId);
+
+    if (!podcast) {
+      throw new ConvexError("Podcast not found");
+    }
+
+    return await ctx.db.patch(args.podcastId, {
+      views: podcast.views + 1,
+    });
+  },
 });
